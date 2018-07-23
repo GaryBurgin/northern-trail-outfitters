@@ -133,7 +133,9 @@ Custom user interfaces are built by leveraging Base Lightning Components like [l
 ### Third-party JavaScript libraries and standard HTML5 interactions
 The [MixChart](https://github.com/trailheadapps/northern-trail-outfitters/blob/master/force-app/main/default/aura/MixChart) component shows how a third-party library like [ChartJS](https://www.chartjs.org/) can be used within Lightning Experience. The [MerchandiseMix](force-app/main/default/aura/MerchandiseMix) component provides another example and uses the [countUp.js](https://github.com/inorganik/countUp.js/) library. MerchandiseMix also shows how to use standard HTML 5 functionality like [drag & drop](https://developer.mozilla.org/en-US/docs/Web/API/HTML_Drag_and_Drop_API).
 
-## Additional Resources
+## Optional Companion Apps
+
+### Manufacturing App
 
 Install the [Northern Trail Outfitters Manufacturing](https://github.com/trailheadapps/northern-trail-manufacturing) app to experiment with platform event-based integration.
 
@@ -147,4 +149,16 @@ sfdx force:apex:execute -f ./apex/createPushTopic.apex
 
 Take a look at the `createPushTopic.apex` file in the `/apex` folder to examine the push topic creation logic.
 
-Note that you could also have listened directly for the platform event in the status path component and update the status to **Approved by Manufacturing** in the UI when the event comes in. However, that approach could lead to inconsistencies in case the server-side status update (handled by the **Mix Status Change** process) fails, because a validation rule is not met for example. In that case the UI would show the status as **Approved by Manufacturing**, while the status in the database would still be **Submitted to Manufacturing**. 
+Note that you could also have listened directly for the platform event in the status path component and update the status to **Approved by Manufacturing** in the UI when the event comes in. However, that approach could lead to inconsistencies in case the server-side status update (handled by the **Mix Status Change** process) fails, because a validation rule is not met for example. In that case the UI would show the status as **Approved by Manufacturing**, while the status in the database would still be **Submitted to Manufacturing**.
+
+### Twitter Einstein Analyzer
+
+The [Twitter Einstein Analyzer](https://github.com/trailheadapps/einstein-twitter-analyzer) app is a Node.js app running on Heroku. It monitors tweets for provided keywords you can specify. For example, you can look for all the tweets including the #nto (Northern Trail Outfitters) hashtag. The app uses Einstein Platform Services to analyze each tweet:
+
+- Einstein Sentiment identifies the overall sentiment of the tweet (positive, neutral or negative)
+- Einstein Intent identifies a potential call to action in the tweet
+- Einstein Vision attempts to identify an NTO product in the picture attached to the tweet if any
+
+The Twitter Einstein Analyzer app then publishes a platform event with the Tweet details as well as the Einstein predictions related to the tweet. Click the **Einstein Twitter Analysis** tab in the Salesforce app to see the tweets and associated predictions.
+
+Checkout the Twitter Einstein Analyzer app [repository](https://github.com/trailheadapps/einstein-twitter-analyzer) for installation instructions.
